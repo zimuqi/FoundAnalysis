@@ -44,7 +44,7 @@ def spider_rank():
                 jsonData=demjson.decode(data)
                 for each in jsonData["datas"]:
                     item=each.split(",")
-                    print json.dumps(item,ensure_ascii=False)
+                    print(son.dumps(item,ensure_ascii=False))
                     if one=="gp":
                         foundType=0
                     if one=="hh":
@@ -63,6 +63,7 @@ def found_detail():
     cursor = conn.cursor()
     cursor.execute("SELECT `ades` FROM `fund_ranking` GROUP BY `ades`")
     query=cursor.fetchall()
+    # query=[["502056"]]
     for id in query:
         try:
             url="http://fund.eastmoney.com/f10/jbgk_{}.html".format(id[0])
@@ -75,23 +76,75 @@ def found_detail():
             if req.status_code==200:
                 if "eastmoney" in req.text:
                     doc=pq(req.content)
-                    abhtml=doc(".info.w790 tr").items()
-                    info=[id[0], "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+                    abhtml=doc(".info.w790 td").items()
+                    now=time.strftime("%Y-%m-%d %H:%M",time.localtime())
+                    info=[id[0], "","", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",now]
                     i=1
                     for each in abhtml:
-                        info[i]=each("td").eq(0).text()
-                        i+=1
-                        info[i] = each("td").eq(1).text()
-                        i+=1
+                        if i<20:
+                            if each.html():
+                                if "span" in each.html():
+                                    info[i]=each("span").eq(1).text()
+                                elif "href" in each.html():
+                                    info[i]=each("a").text()
+                                else:
+                                    info[i]=each.text()
+                            i+=1
+                        else:
+                            break
+                    i=21
                     for each in doc(".boxitem.w790 p").items():
-                        info[i] +=each.text().replace('\n','').replace('"',"'")
+                        info[i]=each.text().replace('\n','').replace('"',"'")
                         i+=1
                     info=json.dumps(info,ensure_ascii=False)[1:][:-1]
-                    cursor.execute("INSERT INTO `found_introduce`(`ades`,`fn`,`jn`,`jjdm`,`jjlx`,`fxrq`,`clrq`,`zcgm`,`fegm`,`jjgl`,`jjtg`,`jjjl`,`jjfh`,`glfy`,`tgfl`,`fwf`,`rgfl`,`yjjz`,`gzbd`,`tzmb`,`tzll`,`tzfw`,`tzcl`,`fhcl`,`bjjz`,`sytz`) VALUES (%s)"%info)
-                    conn.commit()
+
+                    # print("INSERT INTO `found_introduce`(`ades`,`fn`,`jn`,`jjdm`,`jjlx`,`fxrq`,`clrq`,`zcgm`,`fegm`,`jjgl`,`jjtg`,`jjjl`,`jjfh`,`glfy`,`tgfl`,`fwf`,`rgfl`,`max_sg`,`max_sh`,`yjjz`,`gzbd`,`tzmb`,`tzll`,`tzfw`,`tzcl`,`fhcl`,`bjjz`,`sytz`,`ctime`) VALUES (%s)"%info)
+                        
+                    # 检查是否存在
+                    cursor.execute("SELECT `id` FROM `found_introduce` WHERE `ades`={}".format(id[0]))
+                    query=cursor.fetchall()
+                    if query:
+                        cursor.execute("REPLACE INTO `found_introduce`(`ades`,`fn`,`jn`,`jjdm`,`jjlx`,`fxrq`,`clrq`,`zcgm`,`fegm`,`jjgl`,`jjtg`,`jjjl`,`jjfh`,`glfy`,`tgfl`,`fwf`,`rgfl`,`max_sg`,`max_sh`,`yjjz`,`gzbd`,`tzmb`,`tzll`,`tzfw`,`tzcl`,`fhcl`,`bjjz`,`sytz`,`ctime`) VALUES (%s)"%info)
+                        conn.commit()
+                        print(u"基金id",id[0],u"更新成功")
+                    else:
+                        cursor.execute("INSERT INTO `found_introduce`(`ades`,`fn`,`jn`,`jjdm`,`jjlx`,`fxrq`,`clrq`,`zcgm`,`fegm`,`jjgl`,`jjtg`,`jjjl`,`jjfh`,`glfy`,`tgfl`,`fwf`,`rgfl`,`max_sg`,`max_sh`,`yjjz`,`gzbd`,`tzmb`,`tzll`,`tzfw`,`tzcl`,`fhcl`,`bjjz`,`sytz`,`ctime`) VALUES (%s)"%info)
+                        conn.commit()
+                        print(u"基金id",id[0],u"保存成功")
         except:
-            print traceback.format_exc()
+            print(u"基金id",id[0],u"更新失败")
+            print(traceback.format_exc())
+            # return
         # return
 
+def found_sector_allocation():
+    """基金的行业配置信息"""
+    conn = pymysql.connect(host='101.132.116.147', port=3306, user='root', passwd='liliangct', db='FoundationData',charset='utf8')
+    cursor = conn.cursor()
+    cursor.execute("SELECT `ades` FROM `found_introduce` GROUP BY `ades`")
+    query=cursor.fetchall()
+    if query:
+        for ades in query:
+            url="http://fund.eastmoney.com/f10/F10DataApi.aspx"
+            year=time.strftime("%Y",time.localtime())
+            params = {
+                "type": "hypz",
+                "code": ades[0],
+                "year": year,
+                "rt":"0.3300044641223907"
+            }
+            headers={
+                "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
+                "Host":"fund.eastmoney.com"
+            }
+
+            req=requests.get(url,params=params,headers=headers)
+            if req.status_code==200:
+                if "apidata" in req.text:
+                    pass
+
+
+
+
 # spider_rank()
-found_detail()
+# found_detail()
