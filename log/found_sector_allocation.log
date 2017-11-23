@@ -1,0 +1,168 @@
+ERROR: åŸºé‡‘id:000452 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 9")
+ERROR: åŸºé‡‘id:000527 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 11")
+ERROR: åŸºé‡‘id:000554 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 13")
+ERROR: åŸºé‡‘id:000573 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 13")
+ERROR: åŸºé‡‘id:000955 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 7")
+ERROR: åŸºé‡‘id:001000 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 21")
+ERROR: åŸºé‡‘id:001030 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1265, u"Data truncated for column 'percent' at row 25")
+ERROR: åŸºé‡‘id:001456 è¡Œä¸šé…ç½®ä¿¡æ¯æ›´æ–°å¤±è´¥
+Traceback (most recent call last):
+  File "C:/Users/Administrator/Desktop/demo/»ù½ğÅÀ³æ/spider.py", line 179, in found_sector_allocation
+    cursor.execute(sql)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+DataError: (1406, u"Data too long for column 'quarter' at row 1")

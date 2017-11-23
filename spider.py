@@ -44,7 +44,7 @@ def spider_rank():
                 jsonData=demjson.decode(data)
                 for each in jsonData["datas"]:
                     item=each.split(",")
-                    print(son.dumps(item,ensure_ascii=False))
+                    print(json.dumps(item,ensure_ascii=False))
                     if one=="gp":
                         foundType=0
                     if one=="hh":
@@ -123,28 +123,153 @@ def found_sector_allocation():
     cursor = conn.cursor()
     cursor.execute("SELECT `ades` FROM `found_introduce` GROUP BY `ades`")
     query=cursor.fetchall()
+    # query=[["000433"]]
     if query:
         for ades in query:
-            url="http://fund.eastmoney.com/f10/F10DataApi.aspx"
-            year=time.strftime("%Y",time.localtime())
-            params = {
-                "type": "hypz",
-                "code": ades[0],
-                "year": year,
-                "rt":"0.3300044641223907"
-            }
-            headers={
-                "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
-                "Host":"fund.eastmoney.com"
-            }
+            try:
+                url="http://fund.eastmoney.com/f10/F10DataApi.aspx"
+                year=time.strftime("%Y",time.localtime())
+                params = {
+                    "type": "hypz",
+                    "code": ades[0],
+                    "year": year,
+                    "rt":"0.3300044641223907"
+                }
+                headers={
+                    "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
+                    "Host":"fund.eastmoney.com"
+                }
 
-            req=requests.get(url,params=params,headers=headers)
-            if req.status_code==200:
-                if "apidata" in req.text:
-                    pass
+                req=requests.get(url,params=params,headers=headers)
+                if req.status_code==200:
+                    if "apidata" in req.text:
+                        c=req.text.replace('var apidata={ content:"',"").replace(";\n","")
+                        doc=pq(c)
+                        data=""
+                        for box in doc(".box").items():
+                            yy=re.compile("\d+")
+                            yyyy=re.findall(yy,box(".left").text())
+                            season="-".join(yyyy)
+                            endTime=box(".px12").text()
 
+                            for tr in box("tr").items():
+                                td=len(tr("td"))
+                                if(td>0):
+                                    indu=""
+                                    perc=""
+                                    tot=""
+                                    if td==6:
+                                        indu=tr("td").eq(1).text()
+                                        perc=tr("td").eq(3).text().replace("%","")
+                                        tot=tr("td").eq(4).text().replace(",","")
+                                    if td==4:
+                                        indu = tr("td").eq(1).text()
+                                        perc = tr("td").eq(2).text().replace("%", "")
+                                        tot = tr("td").eq(3).text().replace(",", "")
+
+                                    data+="('%s','%s','%s','%s','%s','%s'),"%(ades[0],season,endTime,indu,perc,tot)
+                                    # print data
+                        data=data[:-1]
+                        # 删除以前的，保存最新的
+                        try:
+                            if data:
+                                cursor.execute("DELETE FROM `found_sector_allocation` WHERE `ades`={}".format(ades[0]))
+                                sql = "INSERT INTO `found_sector_allocation`(`ades`, `quarter`, `end_date`, `industry`, `percent`, `value`) VALUES %s" % data
+                                # print(sql)
+                                cursor.execute(sql)
+                                conn.commit()
+                                print(u"基金id"+ades[0]+u"行业配置信息更新成功")
+                        except:
+                            with open("log/found_sector_allocation.log","a+") as f:
+                                f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                                f.write(traceback.format_exc())
+                            print(traceback.format_exc())
+                            print(u"基金id"+ades[0]+u"行业配置信息更新失败")
+                            conn.rollback()
+            except:
+                with open("log/found_sector_allocation.log", "a+") as f:
+                    f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                    f.write(traceback.format_exc())
+
+def found_stock():
+    """基金股票持仓"""
+    conn = pymysql.connect(host='101.132.116.147', port=3306, user='root', passwd='liliangct', db='FoundationData',charset='utf8')
+    cursor = conn.cursor()
+    cursor.execute("SELECT `ades` FROM `found_introduce` GROUP BY `ades`")
+    query = cursor.fetchall()
+    # query=[["000433"]]
+    if query:
+        for ades in query:
+            try:
+                url = "http://fund.eastmoney.com/f10/FundArchivesDatas.aspx"
+                year = time.strftime("%Y", time.localtime())
+                params = {
+                    "type": "jjcc",
+                    "code": ades[0],
+                    "year": year,
+                    "topline":10,
+                    "month":9,
+                    "rt": "0.4772628542647177"
+                }
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
+                    "Host": "fund.eastmoney.com"
+                }
+
+                req = requests.get(url, params=params, headers=headers)
+                if req.status_code == 200:
+                    if "apidata" in req.text:
+                        c = req.text.replace('var apidata={ content:"', "").replace(";\n", "")
+                        doc = pq(c)
+                        data = ""
+                        for box in doc(".box").eq(0):
+                            yy = re.compile("\d+")
+                            yyyy = re.findall(yy, box(".left").text())
+                            season = "-".join(yyyy)
+                            endTime = box(".px12").text()
+
+                            for tr in box("tr").items():
+                                td = len(tr("td"))
+                                if (td > 0):
+                                    indu = ""
+                                    perc = ""
+                                    tot = ""
+                                    if td == 6:
+                                        indu = tr("td").eq(1).text()
+                                        perc = tr("td").eq(3).text().replace("%", "")
+                                        tot = tr("td").eq(4).text().replace(",", "")
+                                    if td == 4:
+                                        indu = tr("td").eq(1).text()
+                                        perc = tr("td").eq(2).text().replace("%", "")
+                                        tot = tr("td").eq(3).text().replace(",", "")
+
+                                    data += "('%s','%s','%s','%s','%s','%s')," % (
+                                    ades[0], season, endTime, indu, perc, tot)
+                                    # print data
+                        data = data[:-1]
+                        # 删除以前的，保存最新的
+                        try:
+                            if data:
+                                cursor.execute("DELETE FROM `found_sector_allocation` WHERE `ades`={}".format(ades[0]))
+                                sql = "INSERT INTO `found_sector_allocation`(`ades`, `quarter`, `end_date`, `industry`, `percent`, `value`) VALUES %s" % data
+                                # print(sql)
+                                cursor.execute(sql)
+                                conn.commit()
+                                print(u"基金id" + ades[0] + u"行业配置信息更新成功")
+                        except:
+                            with open("log/found_sector_allocation.log", "a+") as f:
+                                f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                                f.write(traceback.format_exc())
+                            print(traceback.format_exc())
+                            print(u"基金id" + ades[0] + u"行业配置信息更新失败")
+                            conn.rollback()
+            except:
+                with open("log/found_sector_allocation.log", "a+") as f:
+                    f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                    f.write(traceback.format_exc())
 
 
 
 # spider_rank()
 # found_detail()
+# found_sector_allocation()
