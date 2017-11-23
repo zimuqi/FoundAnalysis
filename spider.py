@@ -222,54 +222,61 @@ def found_stock():
                         c = req.text.replace('var apidata={ content:"', "").replace(";\n", "")
                         doc = pq(c)
                         data = ""
-                        for box in doc(".box").eq(0):
-                            yy = re.compile("\d+")
-                            yyyy = re.findall(yy, box(".left").text())
-                            season = "-".join(yyyy)
-                            endTime = box(".px12").text()
+                        box1=doc(".box").eq(0)
+                        yy = re.compile("\d+")
+                        yyyy = re.findall(yy, box1(".left").text())
+                        season = "-".join(yyyy)
+                        endTime = box1(".px12").eq(0).text()
+                        # INSERT INTO `found_stock`(`ades`, `stock_id`, `stock_name`, `percent`, `stock_num`, `stock_total`, `season`, `endTime`) VALUES ()
+                        for tr in box1("tr").items():
+                            td = len(tr("td"))
+                            if (td > 0):
+                                item1 = ""
+                                item2 = ""
+                                item3 = ""
+                                item4 = ""
+                                item5 = ""
+                                if td == 9:
+                                    item1 = tr("td").eq(1).text()
+                                    item2 = tr("td").eq(2).text()
+                                    item3 = tr("td").eq(6).text().replace("%", "")
+                                    item4 = tr("td").eq(7).text().replace(",", "")
+                                    item5 = tr("td").eq(8).text().replace(",", "")
+                                if td == 7:
+                                    item1 = tr("td").eq(1).text()
+                                    item2 = tr("td").eq(2).text()
+                                    item3 = tr("td").eq(4).text().replace("%", "")
+                                    item4 = tr("td").eq(5).text().replace(",", "")
+                                    item5 = tr("td").eq(6).text().replace(",", "")
 
-                            for tr in box("tr").items():
-                                td = len(tr("td"))
-                                if (td > 0):
-                                    indu = ""
-                                    perc = ""
-                                    tot = ""
-                                    if td == 6:
-                                        indu = tr("td").eq(1).text()
-                                        perc = tr("td").eq(3).text().replace("%", "")
-                                        tot = tr("td").eq(4).text().replace(",", "")
-                                    if td == 4:
-                                        indu = tr("td").eq(1).text()
-                                        perc = tr("td").eq(2).text().replace("%", "")
-                                        tot = tr("td").eq(3).text().replace(",", "")
+                                data+= "('%s','%s','%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
 
-                                    data += "('%s','%s','%s','%s','%s','%s')," % (
-                                    ades[0], season, endTime, indu, perc, tot)
-                                    # print data
                         data = data[:-1]
                         # 删除以前的，保存最新的
                         try:
                             if data:
-                                cursor.execute("DELETE FROM `found_sector_allocation` WHERE `ades`={}".format(ades[0]))
-                                sql = "INSERT INTO `found_sector_allocation`(`ades`, `quarter`, `end_date`, `industry`, `percent`, `value`) VALUES %s" % data
+                                cursor.execute("DELETE FROM `found_stock` WHERE `ades`={} AND `season`='{}'".format(ades[0],season))
+                                sql = "INSERT INTO `found_stock`(`ades`, `stock_id`, `stock_name`, `percent`, `stock_num`, `stock_total`, `season`, `endTime`) VALUES %s" % data
                                 # print(sql)
                                 cursor.execute(sql)
                                 conn.commit()
-                                print(u"基金id" + ades[0] + u"行业配置信息更新成功")
+                                print(u"基金id" + ades[0] + u"股票份额配置信息更新成功")
                         except:
-                            with open("log/found_sector_allocation.log", "a+") as f:
-                                f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                            with open("log/found_stock.log", "a+") as f:
+                                f.write("ERROR: 基金id:{} 股票份额配置信息更新成功\n".format(ades[0]))
                                 f.write(traceback.format_exc())
                             print(traceback.format_exc())
-                            print(u"基金id" + ades[0] + u"行业配置信息更新失败")
+                            print(u"基金id" + ades[0] + u"股票份额配置信息更新成功")
                             conn.rollback()
             except:
-                with open("log/found_sector_allocation.log", "a+") as f:
-                    f.write("ERROR: 基金id:{} 行业配置信息更新失败\n".format(ades[0]))
+                print(traceback.format_exc())
+                with open("log/found_stock.log", "a+") as f:
+                    f.write("ERROR: 基金id:{} 股票份额配置信息更新成功\n".format(ades[0]))
                     f.write(traceback.format_exc())
 
-
+            # return
 
 # spider_rank()
 # found_detail()
 # found_sector_allocation()
+found_stock()

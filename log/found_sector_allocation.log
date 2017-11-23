@@ -166,3 +166,121 @@ Traceback (most recent call last):
   File "C:\python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
     raise errorclass(errno, errval)
 DataError: (1406, u"Data too long for column 'quarter' at row 1")
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 255, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 254, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 253, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 254, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 253, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 253, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 253, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 253, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 254, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 255, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 255, in found_stock
+    data+= "('%s','%s','%s','%s','%s','%s')," % (ades[0], item1, item2, item3, item4, item5,season,endTime)
+TypeError: not all arguments converted during string formatting
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 266, in found_stock
+    cursor.execute(sql)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1136, "Column count doesn't match value count at row 1")
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 266, in found_stock
+    cursor.execute(sql)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1136, "Column count doesn't match value count at row 1")
+ERROR: 基金id:000001 行业配置信息更新失败
+Traceback (most recent call last):
+  File "spider.py", line 266, in found_stock
+    cursor.execute(sql)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "C:\Python\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "C:\Python\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Python\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1136, "Column count doesn't match value count at row 1")
